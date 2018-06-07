@@ -1,3 +1,4 @@
+//create scene is to create the whole world of the game
 var createScene = function ()
 {
     var scene = new BABYLON.Scene(engine);
@@ -11,10 +12,11 @@ var createScene = function ()
     scene.activeCamera = followCamera;
     createLights(scene);
     createHeroDude(scene);
-    /*createScore();*/
+    createScore();
     return scene;
 };
 
+//this is to create the ground as well as applying its physics
 function CreateGround(scene)
 {
     var ground = new BABYLON.Mesh.CreateGroundFromHeightMap("ground","images/hmap1.png",2000,2000,20,0,100,scene,false,OnGroundCreated);
@@ -29,6 +31,7 @@ function CreateGround(scene)
 
 }
 
+//this is to create the score
 function createScore(){
     var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
     
@@ -49,6 +52,7 @@ function createScore(){
     rect1.addControl(text1);
 }
 
+//this is to create the sky box and set it in to day time
 function createSky(scene){
     var skyMaterial = new BABYLON.SkyMaterial("skyMaterial", scene);
     skyMaterial.backFaceCulling = false;
@@ -79,6 +83,7 @@ function createSky(scene){
         setSkyConfig("material.inclination", skyMaterial.inclination, 0);
 }
 
+//creating individual trees
 function createTrees(scene){
     var tree1 = new BABYLON.MeshBuilder.CreateBox("box1", {height: 10, depth:1, width:1}, scene);
     var tree2 = new BABYLON.MeshBuilder.CreateBox("box2", {height: 10, depth:1, width:1}, scene);
@@ -204,6 +209,7 @@ function createTrees(scene){
     });
 }
 
+//create camera
 function createFreeCamera(scene)
 {
     var camera = new BABYLON.FreeCamera("freeCamera", new BABYLON.Vector3(0,0,0), scene);
@@ -218,6 +224,7 @@ function createFreeCamera(scene)
     return camera;
 }
 
+//create lights
 function createLights(scene)
 {
     var light0 = new BABYLON.DirectionalLight('dir0', new BABYLON.Vector3(-.1,-1,0),scene);
@@ -225,6 +232,7 @@ function createLights(scene)
 
 }
 
+//to make the camera follow the tank
 function createFollowCamera(scene,target)
 {
     var camera = new BABYLON.FollowCamera("tankFollowCamera",target.position, scene, target);

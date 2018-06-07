@@ -1,5 +1,6 @@
 class Dude
 {
+    //to create an individual soldier
     constructor(dudeMesh, speed, id, scene, scaling)
     {
         this.dudeMesh = dudeMesh;
@@ -28,6 +29,7 @@ class Dude
 
     }
 
+    //to make the soldier move as well as setting the direction of its movement
     move()
     {
         if (!this.bounder) return;
@@ -43,6 +45,7 @@ class Dude
             this.bounder.moveWithCollisions(dir.multiplyByFloats(this.speed,this.speed,this.speed));
     }
 
+    //creating a box to avoid colision with the other meshes
     createBoundingBox()
     {
         var lengthX = Dude.boundingBoxParameters.lengthX;
@@ -66,6 +69,7 @@ class Dude
         return bounder;
     }
 
+    //to calculate the size of the box
     CalculateBoundingBoxParameters() {
         var minX = 999999; var minY = 99999; var minZ = 999999;
         var maxX = -99999; var maxY = -999999; var maxZ = -99999;
@@ -109,6 +113,7 @@ class Dude
     }
 }
 
+//creating the first soldier
 function createHeroDude(scene)
 {
     BABYLON.SceneLoader.ImportMesh("him","Models/Dude/", "Dude.babylon", scene, onDudeImported);
@@ -133,6 +138,7 @@ function createHeroDude(scene)
     }
 }
 
+//to create multiple soldiers
 function DoClone(original, skeletons, id) {
     var myClone;
     var xrand = Math.floor(Math.random() * 501) - 250;
@@ -171,6 +177,7 @@ function DoClone(original, skeletons, id) {
     return myClone;
 }
 
+//to move the original soldier
 function moveHeroDude()
 {
     var heroDude = scene.getMeshByName("heroDude");
@@ -178,6 +185,7 @@ function moveHeroDude()
         heroDude.Dude.move();
 }
 
+//to move the other soldiers
 function moveOtherDudes()
 {
     if (scene.dudes) {

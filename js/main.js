@@ -1,3 +1,4 @@
+//declaring global variables
 var canvas;
 var engine;
 var scene;
@@ -14,6 +15,7 @@ var dudeDie;
 
 document.addEventListener("DOMContentLoaded", startGame);
 
+//the function that loads the game on the initial opening
 function  startGame() {
     canvas = document.getElementById('renderCanvas');
     engine = new BABYLON.Engine(canvas,true);
@@ -21,6 +23,7 @@ function  startGame() {
 
     var tank = scene.getMeshByName('Tank');
 
+    //importing music
     var bgMusic = new BABYLON.Sound("Tank", "Sound/BackgroundMusic.mp3", scene, null, {loop: true, autoplay: true});
     tankTrack = new BABYLON.Sound("Tank", "Sound/TankMove.mp3", scene, null, {loop: true, autoplay: true});
     tankFire = new BABYLON.Sound("Fire", "Sound/TankFire.mp3", scene, null, {loop: false, autoplay: false});
@@ -34,13 +37,15 @@ function  startGame() {
     tankFire.setVolume(0.2);
 
     modifySettings();
+
+    //listing functions that is looped
     var toRender = function ()
     {
         tank.move();
         tank.fire();
         moveHeroDude();
         moveOtherDudes();
-        /*createScore();*/
+        createScore();
         scene.render();
     }
 
@@ -48,8 +53,7 @@ function  startGame() {
     engine.runRenderLoop(toRender);
 }
 
-
-
+//to list the interactive keys
 document.addEventListener("keydown", function(event)
 {
     if(event.key == "w" || event.key == "W")
